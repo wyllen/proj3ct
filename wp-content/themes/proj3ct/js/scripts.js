@@ -1,5 +1,3 @@
-$(document).ready(function(){
-
 function loadDetail(detailType,detailId,element){
 			var data = {
 			action: 'get_detail',
@@ -75,6 +73,7 @@ function closefull(){
 }
 
 
+$(document).ready(function(){
 
 	$('.sidebar-left').on('keyup','.sidebar-search-input',function(){
 		 searchSidebar($(this).val());
@@ -97,9 +96,4 @@ function closefull(){
 	$('.content').on('click','.item-list-slider-view-full',function(){
 		viewfull($(this));
 	})
-	$('.content').on('click','.view-full-close',function(){
-		console.log('ok');
-		closefull();
-	})
-
 })
