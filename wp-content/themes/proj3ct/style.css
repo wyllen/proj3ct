@@ -225,13 +225,16 @@ html,body{
 }
 body{
 	font-family: 'Open Sans', sans-serif;
-	background: url('img/blurred-bg.jpg') #1b1e29;
+	background: url('img/blurred-bg.jpg') #1b1e29 fixed;
 	background-size: cover;
 	color:#fff;
 }
 a{
 	text-decoration: none;
 	color:#fff;
+}
+*[contenteditable=true]{
+outline: none;
 }
 ::selection {
 background:#64afc7;
@@ -258,6 +261,7 @@ background:#64afc7;
 .main-menu li,.item-list-wrapper {
 position: relative;
 min-height: 34px;
+white-space: nowrap;
 }
 .item-delete{
 	cursor: pointer;
@@ -286,8 +290,10 @@ min-height: 34px;
 }
 .item-list-delete {
 position: absolute;
-top: 9px;
+top: 7px;
 right: 20px;
+height: 1em;
+line-height: 1em;
 }
 .main-menu li a, .item-list-wrapper .item-list-link, .item-list-head,.item-box-head,.item-box-head h2,.item-add-input-wrapper,.item-list-sub-list-element {
 height: 34px;
@@ -297,6 +303,14 @@ display: block;
 .item-list-wrapper .item-list-link, .item-list-head,.sidebar-left .parent-box-head,.item-add-input-wrapper,.item-box-head,.item-list-sub-list-element{
 padding-left: 20px;
 padding-right: 20px;
+}
+.item-list-wrapper .item-list-link{
+text-overflow: ellipsis;
+overflow: hidden;
+padding-right: 35px;
+}
+.item-list-link.active{
+background: rgba(255, 255, 255, 0.2);
 }
 .item-list-content {
 max-height: 0;
@@ -424,9 +438,22 @@ margin-right: 0.5em;
 .sidebar-left{
 	background:#1b1e29;
 	float: left;
-	width: 25%;
+width: 0%;
 	padding-bottom: 10000px;
 	margin-bottom: -10000px;
+	-webkit-transition: 500ms ease all;
+	-moz-transition: 500ms ease all;
+	-ms-transition: 500ms ease all;
+	-o-transition: 500ms ease all;
+	transition: 500ms ease all;
+	overflow: hidden;
+	position: fixed;
+	left: 200px;
+	top: 0;
+}
+.sidebar-open .sidebar-left{
+	width: 25%;
+	width: calc( ( 100% - 200px ) * 0.25);
 }
 .sidebar-search-input {
 display: block;
@@ -444,25 +471,137 @@ text-indent: 10px;
 .sidebar-search-input:focus {
 box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
+
 /*---------------------------------------MAIN--------------------------------*/
 .main {
 padding-left: 200px;
 min-height: 100%;
 overflow: hidden;
 }
+
 .content {
+padding-left: 0%;
+	-webkit-transition: 500ms ease all;
+	-moz-transition: 500ms ease all;
+	-ms-transition: 500ms ease all;
+	-o-transition: 500ms ease all;
+	transition: 500ms ease all;
+}
+
+.sidebar-open .content{
 padding-left: 25%;
 }
 .content .parent-box-head{
 	background: #13151d;
 }
-.content-box-head-input {
-border: none;
+.parent-box-head h1{
+display: inline-block;
 width: 100%;
 height: 40px;
 background: none;
-outline: none;
 color: #FFF;
 font-size: 1.5em;
 text-indent: 10px;
+}
+
+.item-box-col-2 {
+padding-top: 40px;
+clear: both;
+}
+.item-list-slider .item-list-wrapper.active .item-list-content{
+	max-height: inherit;
+}
+
+.item-list-slider .item-list-wrapper{
+	position: absolute;
+	top: 0;
+	opacity: 0;
+	left: 0;
+	z-index: -1;
+	-webkit-transition: 500ms ease all;
+	-moz-transition: 500ms ease all;
+	-ms-transition: 500ms ease all;
+	-o-transition: 500ms ease all;
+	transition: 500ms ease all;
+}
+
+.item-list-slider .item-list-wrapper.active{
+	position: relative;
+	opacity: 1;
+	z-index: 2;
+}
+.item-list-img-wrapper {
+text-align: center;
+}
+.item-list-img-wrapper img {
+max-width: 100%;
+}
+.item-list-slider-wrapper {
+position: relative;
+}
+.item-list-slider-prev,.item-list-slider-next {
+position: absolute;
+top: 50%;
+margin-top: -0.5em;
+left: 10px;
+background: rgba(0, 0, 0, 0.81);
+z-index: 2;
+width: 1em;
+height: 1em;
+font-size: 3em;
+text-align: center;
+line-height: 1em;
+opacity: 0;
+	-webkit-transition: 500ms ease all;
+	-moz-transition: 500ms ease all;
+	-ms-transition: 500ms ease all;
+	-o-transition: 500ms ease all;
+	transition: 500ms ease all;
+}
+.content .box-content{
+	padding-bottom: 40px;
+}
+.item-list-slider-next{
+	left: inherit;
+	right: 10px;
+}
+.item-list-slider-wrapper:hover .item-list-slider-prev,.item-list-slider-wrapper:hover .item-list-slider-next,.item-list-slider-wrapper:hover .item-list-slider-view-full {
+	opacity: 1;
+	}
+.item-list-slider-view-full {
+	position: absolute;
+	top: 45px;
+	right: 10px;
+	background: rgba(100, 175, 199, 0.8);
+	width: 1.2em;
+	height: 1em;
+	font-size: 2.5em;
+	z-index: 9;
+	line-height: 1.2em;
+	text-align: center;
+opacity: 0;
+}
+
+.view-full-box {
+position: absolute;
+top: 0;
+z-index: 9999;
+bottom: 0;
+left: 0;
+right: 0;
+background: rgba(0, 0, 0, 0.5);
+}
+.view-full-toolbar {
+position: fixed;
+bottom: 0;
+left: 0;
+height: 35px;
+width: 100%;
+background: rgba(0, 0, 0, 0.8);
+text-align: center;
+line-height: 35px;
+}
+.view-full-close {
+float: right;
+margin-right: 10px;
 }
