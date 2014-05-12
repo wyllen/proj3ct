@@ -586,10 +586,9 @@ opacity: 0;
 position: absolute;
 top: 0;
 z-index: 9999;
-bottom: 0;
 left: 0;
 right: 0;
-background: rgba(0, 0, 0, 0.5);
+background: #fff;
 }
 .view-full-toolbar {
 position: fixed;
@@ -604,4 +603,33 @@ line-height: 35px;
 .view-full-close {
 float: right;
 margin-right: 10px;
+}
+.view-full-img-wrapper {
+text-align: center;
+padding-bottom: 35px;
+}
+.view-full-img-wrapper-content{	
+	display: inline-block;
+	position: relative;
+}
+.view-full-add-annotation.selected {
+color: #64AFC7;
+}
+.view-full-img-wrapper img.img-annotation{
+	cursor: crosshair;
+	}
+.annotation{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #64AFC7;
+}
+.annotation-content {
+position: absolute;
+top: 10px;
+left: 10px;
+background: #2B2F3F;
+border-radius: 5px;
+padding: 5px;
 }

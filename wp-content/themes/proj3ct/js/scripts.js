@@ -62,17 +62,30 @@ function viewfull(element){
 	$active = element.parent().prev().children('.active').find('img');
 	console.log($active);
 	if($('.view-full-box').length==0){
-	$('body').append('<div class="view-full-box" style="display:none;"><div class="view-full-img-wrapper"><img src="'+ $active.attr("src") +'" alt="" /></div><div class="view-full-toolbar"><a href="javascript:void(0)" class="view-full-add-annotation"><span class="project-pen"></span></a><a href="javascript:void(0)" onclick="closefull();" class="view-full-close">x</a></div></div>');
+	$('body').append('<div class="view-full-box" style="display:none;"><div class="view-full-img-wrapper"><span class="view-full-img-wrapper-content"><img src="'+ $active.attr("src") +'" alt="" /></span></div><div class="view-full-toolbar"><a href="javascript:void(0)" class="view-full-add-annotation"><span class="project-pen"></span></a><a href="javascript:void(0)" class="view-full-close">x</a></div></div>');
 	}else{
-		$('.view-full-img-wrapper').html('<img src="'+ $active.attr("src") +'" alt="" />')
+		$('.view-full-img-wrapper .view-full-img-wrapper-content').html('<img src="'+ $active.attr("src") +'" alt="" />')
 	}
+	$('.main').fadeOut();
 	$('.view-full-box').fadeIn();
 }
 function closefull(){
 	$('.view-full-box').fadeOut();
+	$('.main').fadeIn();
 }
+function selectAnnot(element){
+	$('.view-full-img-wrapper img').toggleClass('img-annotation');
+	element.toggleClass('selected');
+}
+function addAnnot(element,event){
+		var posX = element.position().left;
+        var posY = element.position().top;
+        var top = event.pageY - posY ;
+        var left = event.pageX - posX - element.offset().left;
+        $('.annotation-content').removeClass('open');
+		$('.view-full-img-wrapper-content').append('<div class="annotation" style="top:'+top+'px;left:'+left+'px;" > <div class="annotation-content open"><form><textarea></textarea><div><span class="item-submit"></span></div></form></div> </div>');
 
-
+}
 $(document).ready(function(){
 
 	$('.sidebar-left').on('keyup','.sidebar-search-input',function(){
@@ -95,5 +108,15 @@ $(document).ready(function(){
 	})
 	$('.content').on('click','.item-list-slider-view-full',function(){
 		viewfull($(this));
+	})
+	$(document).on('click','.view-full-close',function(){
+		closefull();
+	})
+	$(document).on('click','.view-full-add-annotation',function(){
+		selectAnnot($(this));
+	})
+
+	$(document).on('click','.img-annotation',function(e){
+		addAnnot($(this),e);
 	})
 })
