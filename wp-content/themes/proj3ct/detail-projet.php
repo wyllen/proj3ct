@@ -85,7 +85,7 @@ if ( $query->have_posts() ) {
 					</div>
 				</article>
 
-				<article class="item-box item-box-maquettes item-box-col-2">
+				<article class="item-box item-box-maquettes item-box-col-1 item-box-left">
 					<header class="item-box-head">
 						<h2>
 							Maquettes

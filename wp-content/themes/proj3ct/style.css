@@ -322,11 +322,18 @@ overflow: hidden;
 .item-box-col-1 {
 width: 48.3%;
 }
+.item-box-col-2 {
+width: 100%;
+clear: both;
+}
 .item-box-left{
 	float: left;
 }
 .item-box-right{
 	float: right;
+}
+.item-box-left ~ .item-box-left, .item-box-right ~ .item-box-right {
+margin-top: 3%;
 }
 .item-add-input {
 	border: none;
@@ -504,10 +511,7 @@ font-size: 1.5em;
 text-indent: 10px;
 }
 
-.item-box-col-2 {
-padding-top: 40px;
-clear: both;
-}
+
 .item-list-slider .item-list-wrapper.active .item-list-content{
 	max-height: inherit;
 }
